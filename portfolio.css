@@ -582,6 +582,33 @@ section h2 {
 	text-align: left;
 	line-height: 1.9;
 }
+.cv-download {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+.cv-button {
+	display: inline-block;
+	padding: 1rem 2.5rem;
+	background-color: #8AB4F8;
+	color: #0f172a;
+	text-decoration: none;
+	font-size: 1.1rem;
+	font-weight: 600;
+	border-radius: 8px;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(138, 180, 248, 0.3);
+}
+
+.cv-button:hover {
+	background-color: #FFD700;
+	transform: translateY(-3px);
+	box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+.cv-button:active {
+	transform: translateY(1px);
+}
 
 /* Contact Section */
 .contact-section {
@@ -688,6 +715,16 @@ section h2 {
 	transform: translateX(5px);
 	box-shadow: 0 4px 15px rgba(138, 180, 248, 0.2);
 }
+.contact-method a {
+	text-decoration: none;
+	color: #5C4A3A;
+	transition: color 0.3s ease;
+}
+
+.contact-method a:hover {
+	color: #8AB4F8;
+	text-decoration: underline;
+}
 
 .contact-icon {
 	font-size: 2rem;
@@ -712,6 +749,17 @@ section h2 {
 	color: #5C4A3A;
 	margin: 0;
 	font-size: 0.95rem;
+}
+
+.contact-email {
+  color: #8AB4F8;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.contact-email:hover {
+  color: #FFD700;
 }
 
 /* Footer */

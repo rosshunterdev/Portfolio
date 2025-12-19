@@ -221,6 +221,12 @@
 						Currently seeking opportunities in junior development roles, game development, and IT recruitment 
 						where I can contribute my blend of technical expertise and interpersonal skills.
 					</p>
+					
+					<div class="cv-download">
+						<a href="Ross_Crawford_CV.pdf" class="cv-button" download>
+							Download My CV
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -233,7 +239,7 @@
 			or just want to chat about psychology meets tech, I'd love to hear from you.</p>
 			
 			<div class="contact-content">
-				<form class="contact-form">
+				<form class="contact-form" action="https://formspree.io/f/mwveplgw" method="POST">
 					<div class="form-group">
 						<label for="name">Name</label>
 						<input type="text" id="name" name="name" placeholder="Your name" required>
@@ -255,21 +261,23 @@
 						<span class="contact-icon">📧</span>
 						<div>
 							<strong>Email</strong>
-							<p>ross.hunter.crawford@gmail.com</p>
+							<a href="mailto:ross.hunter.crawford@gmail.com" class="contact-email">
+								ross.hunter.crawford@gmail.com
+							</a>
 						</div>
 					</div>
 					<div class="contact-method">
 						<span class="contact-icon">💼</span>
 						<div>
 							<strong>LinkedIn</strong>
-							<p>linkedin.com/in/yourprofile</p>
+							<a href="https://www.linkedin.com/in/ross-crawford-5068a2324/" target="blank_" rel="noopener noreferrer"><p>linkedin.com/ross-crawford</p>
 						</div>
 					</div>
 					<div class="contact-method">
 						<span class="contact-icon">🐙</span>
 						<div>
 							<strong>GitHub</strong>
-							<p>github.com/yourusername</p>
+							<a href="https://github.com/izanagi-dev" target="_blank" rel="noopener noreferrer">https://github.com/izanagi-dev</a>
 						</div>
 					</div>
 				</div>
@@ -296,13 +304,6 @@
 					});
 				}
 			});
-		});
-
-		// Form handling
-		document.querySelector('.contact-form').addEventListener('submit', function(e) {
-			e.preventDefault();
-			alert('Thanks for reaching out! (Connect this to a real backend service like Formspree or EmailJS)');
-			this.reset();
 		});
 	</script>
 </body>

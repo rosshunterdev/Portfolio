@@ -260,6 +260,7 @@ section h2 {
 	margin: 0 auto 4rem;
 	line-height: 1.8;
 }
+
 /* Projects Section */
 .projects-section {
 	padding: 10rem 0;
@@ -362,13 +363,12 @@ section h2 {
 	margin-left: auto;
 }
 
-.project-link {
-	color: rgba(253, 183, 19, 0.8);
-	text-decoration: none;
-	font-weight: 600;
-	font-size: 0.95rem;
-	transition: all 0.3s ease;
-	display: inline-flex;
+.project-links {
+	display: flex;
+	gap: 1rem;
+	margin-left: auto;
+	flex-wrap: nowrap; /* Change from wrap to nowrap */
+	justify-content: flex-end;
 	align-items: center;
 }
 
@@ -380,13 +380,23 @@ section h2 {
 .project-btn {
 	display: inline-flex;
 	align-items: center;
-	padding: 0.7rem 1.5rem;
+	justify-content: center;
+	padding: 0.6rem 1.2rem; /* Reduced from 0.7rem 1.5rem */
 	border-radius: 8px;
 	font-weight: 600;
-	font-size: 0.95rem;
+	font-size: 0.9rem; /* Reduced from 0.95rem */
 	text-decoration: none;
 	transition: all 0.3s ease;
 	cursor: pointer;
+	white-space: nowrap;
+}
+
+.project-links {
+	display: flex;
+	gap: 1rem;
+	margin-left: auto;
+	flex-wrap: wrap;
+	justify-content: flex-end; /* ADD THIS - aligns buttons to the right */
 }
 
 .project-btn.primary {
@@ -612,16 +622,26 @@ section h2 {
 
 /* Contact Section */
 .contact-section {
-	background-color: #1e293b; /* Dark background */
+	background-color: #1e293b;
 	padding: 6rem 0;
 }
 
 .contact-section h2 {
-	color: #8AB4F8; /* Light blue heading */
+	color: #8AB4F8; 
+	margin-bottom:2rem;
+}
+
+.contact-intro {
+	max-width: 800px;
+	margin: 0 auto 4rem;
+	padding: 2rem 0;
+	border-top: 2px solid rgba(253, 183, 19, 0.3);
+	border-bottom: 2px solid rgba(253, 183, 19, 0.3);
 }
 
 .contact-section .section-description {
-	color: #cbd5e1; /* Light gray description */
+	color: #cbd5e1;
+	margin: 0;
 }
 
 .contact-content {

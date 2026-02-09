@@ -3,6 +3,8 @@ body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     color: #1E293B;
+	max-width:100%;
+	overflow-x:hidden;
 }
 
 /* --- CLEAN NAVBAR --- */
@@ -638,6 +640,12 @@ footer {
     .hero-bottom-right {
         align-self: flex-start; /* Aligns card to the left on mobile */
     }
+	
+	.hero-tagline {
+		white-space: normal;
+		letter-spacing: 0.2rem;
+		max-width: 100%;
+	}
 	
 
 	/* Section headings */

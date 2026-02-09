@@ -675,6 +675,18 @@ footer {
 	.project-card h3 {
 		font-size: 1.3rem;
 	}
+	
+	.project-links {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.project-btn {
+		width: 100%;
+		text-align: center;
+		box-sizing: border-box;
+		white-space: normal;
+	}
 
 	/* Skills section mobile */
 	.skills-grid {

@@ -65,25 +65,35 @@ body {
 }
 
 /* --- NAV LINKS: REFINED --- */
+/* --- RESET & LAYOUT --- */
 .navbar-headers {
+    list-style: none; /* Removes bullet points from the new <ul> */
     display: flex;
-    gap: 2.5rem;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
 }
 
+.navbar-logo a, 
 .nav-link {
-    color: #64748B;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
+    text-decoration: none !important; /* Forces no underline */
+    color: #1E293B;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    opacity: 0.7; /* Subdued until hover */
-    transition: all 0.3s ease;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    transition: opacity 0.3s ease;
 }
 
-.nav-link:hover {
-    opacity: 1;
-    color: #000000;
+/* Specific style for the 'Home' link to match your branding */
+.logo-link {
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    position: relative;
+}
+
+.nav-link:hover, .logo-link:hover {
+    opacity: 0.6; /* Sleek feedback without using underlines */
 }
 
 /* --- EDITORIAL SECTION HEADERS --- */
@@ -166,15 +176,16 @@ body {
 
 .hero-minimalist {
     background-color: #F8F5F0; 
-    min-height: 85vh; /* Changed from 100vh to bring projects up */
-    padding-top: 120px; 
+    min-height: 70vh; /* Changed from 100vh to bring projects up */
+    padding-top: 80px; 
     display: flex;
     flex-direction: column;
 }
 
 
 .hero-top-left {
-    padding-top: 50px; /* Adjust this to move the name further down */
+    padding-top: 40px; /* Adjust this to move the name further down */
+	margin-left: -10px;
     /* If you want it further left than the rest of the content: */
     position: relative;
     left: -150px; 
@@ -191,10 +202,11 @@ body {
 /* 2. Hero Grid Adjustment */
 .hero-editorial-grid {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 75vh;      /* Slightly shorter to keep content in view */
-    /* REMOVE width: 100% if it's there */
+    flex-direction: row;        /* Changed from column to get horizontal separation */
+    justify-content: space-between; 
+    align-items: stretch;       /* Allows internal items to use different alignments */
+    height: 70vh;               /* Adjust this to control vertical separation */
+    padding-top: 100px;
 }
 
 .hero-name {
@@ -442,32 +454,95 @@ section h2 {
 
 /* Skills Section */
 
-/*
+
 .skills-section {
-	background: linear-gradient(to bottom, 
-		#0f172a 0%, 
-		#0f172a 70%, 
-		#1e293b 100%
-	);
-	*/
-	padding: 6rem 0;
+    background-color: #F8F5F0; /* Matching your cream base */
+    padding: 120px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.skills-section h2 {
-	color: #8AB4F8;
+/* Target the specific section headers */
+.skills-section h2, 
+.contact-section h2 {
+    font-family: 'Inter', sans-serif;
+    /* Increase size significantly for visual hierarchy */
+    font-size: 1.25rem;       
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;    /* Keeps the 'Sleek' premium look */
+    color: #000000;
+    
+    /* Alignment & Vertical Accent */
+    text-align: left;
+    display: block;
+    border-left: 5px solid #000000;
+    padding-left: 1.5rem;
+    margin-bottom: 3.5rem;
+    
+    /* Match the subtle shadow from the hero */
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
 }
 
 .skills-section .section-description {
-	color: #cbd5e1;
+    color: #64748B;
+    text-align: left;
+    margin-left: 0;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-bottom: 5rem;
 }
 
 .skills-grid {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 2rem;
-	max-width: 1400px;
-	margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem; /* Increased for breathing room */
+    padding: 2rem 0; /* Space at top/bottom for the cards to 'jump' into */
 }
+
+.skill-category {
+    background: transparent;
+    padding: 2.5rem;
+    border-radius: 20px; /* Smooth, modern corners */
+    border: 1px solid transparent;
+    transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1); /* Professional 'snap' */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden; /* Clips the glow effect */
+}
+
+/* Replace the .skill-category:hover block with this if you prefer a frame */
+.skill-category:hover {
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+    outline-offset: 10px; /* This keeps the border AWAY from the text */
+    transform: translateY(-8px);
+}
+
+
+
+.skill-category:hover::after {
+    transform: translateX(0);
+}
+
+/* CLEANUP: Remove the sliding text and blue markers */
+.skill-category li {
+    list-style: none;
+    padding: 0.6rem 0;
+    color: #475569;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    transform: none !important; /* Stop the text from sliding right */
+}
+
+.skill-category:hover li {
+    color: #1E293B;
+}
+
+.skill-category li::before {
+    content: none !important; /* Removes the '▸' marker */
+}
+
+
 
 /* Stack on smaller screens */
 @media (max-width: 1200px) {
@@ -482,56 +557,50 @@ section h2 {
 	}
 }
 .skill-category {
-	background-color: #1e293b;
-	padding: 2rem;
-	border-radius: 12px;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-	border-top: 4px solid rgba(253, 183, 19, 0.5);
-	transition: all 0.3s ease;
+    background: transparent; /* Remove the dark blue boxes */
+    padding: 0;
+    border: none;
+    box-shadow: none;
 }
 
 .skill-category:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 8px 25px rgba(138, 180, 248, 0.3);
-	border-top-color: #FDB713;
+    transform: none; /* Remove the "float" effect for a more grounded feel */
 }
 
 .skill-category h3 {
-	color: #8AB4F8;
-	border-bottom: 2px solid rgba(138, 180, 248, 0.3);
-	padding-bottom: 1rem;
-	margin-bottom: 1.5rem;
-	font-size: 1.3rem;
-	font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #000000;
+    border-bottom: 2px solid #000000; /* Bold black divider */
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .skill-category ul {
-	list-style: none;
-	padding: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
+
 .skill-category li {
-	color: #cbd5e1;
-	padding: 0.6rem 0;
-	position: relative;
-	padding-left: 1.5rem;
-	line-height: 1.5;
-	min-height: 2.5em;
+    font-size: 0.95rem;
+    color: #475569;
+    padding: 0.4rem 0;
+    line-height: 1.5;
+    padding-left: 0; /* Remove the padding for markers */
+}
+
+/* Remove the '▸' marker for a cleaner look */
+.skill-category li::before {
+    content: none;
 }
 
 .skill-category li:hover {
-	color: #FDB713;
-}
-
-.skill-category li::before {
-	content: '▸';
-	position: absolute;
-	left: 0;
-	color: rgba(253, 183, 19, 0.7);
-	transition: all 0.2s ease;
-}
-
-.skill-category li:hover::before {
-	color: #FDB713;
+    color: #000000;
+    font-weight: 500;
 }
 
 /* About Section */
@@ -927,6 +996,16 @@ footer p {
 		line-height: 1.2;
 	}
 	
+	.hero-editorial-grid {
+        flex-direction: column; /* Stacks name and card on mobile */
+        height: auto;
+        gap: 4rem;
+    }
+    
+    .hero-bottom-right {
+        align-self: flex-start; /* Aligns card to the left on mobile */
+    }
+	
 	.subtitle {
 		font-size: 1rem;
 	}
@@ -1210,3 +1289,16 @@ footer p {
 }
 
 
+
+@media (max-width: 1024px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2x2 grid for tablets */
+        gap: 4rem 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .skills-grid {
+        grid-template-columns: 1fr; /* Single column for phones */
+    }
+}

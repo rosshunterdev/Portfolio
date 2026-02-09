@@ -16,25 +16,26 @@ body {
 }
 
 /* --- CLEAN NAVBAR --- */
+/* --- CLEAN NAVBAR --- */
 .navbar {
-    height: 80px; /* Slightly taller for breathing room */
-    background-color: rgba(248, 245, 240, 0.8); /* More transparent */
-    backdrop-filter: blur(12px); 
+    height: 80px;
+    background-color: rgba(248, 245, 240, 0.8);
+    backdrop-filter: blur(12px);
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 100%; /* Ensures it spans the full screen */
     z-index: 1000;
-    border-bottom: 1px solid rgba(30, 41, 59, 0.05); /* Almost invisible line */
-    display: flex;
-    align-items: center;
+    /* border-bottom: 1px solid rgba(30, 41, 59, 0.05); */
+    display: flex; 
+    align-items: center; /* Centers the container vertically */
 }
 
 .navbar-container {
-    width: 100%;
-    max-width: 1100px; /* Aligns with your hero content */
-    margin: 0 auto;
+    width: 100%; /* Crucial: Takes up the available space */
+    max-width: 1100px; /* Limits width to align with hero */
+    margin: 0 auto; /* Centers the content box */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Pushes Logo to left, Links to right */
     align-items: center;
     padding: 0 2rem;
 }
@@ -70,7 +71,7 @@ body {
 }
 
 .nav-link {
-    color: #1E293B;
+    color: #64748B;
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 600;
@@ -82,7 +83,47 @@ body {
 
 .nav-link:hover {
     opacity: 1;
-    color: #8AB4F8;
+    color: #000000;
+}
+
+/* --- EDITORIAL SECTION HEADERS --- */
+.section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;        /* Increased from 0.75rem for visibility */
+    font-weight: 800;         /* Extra Bold for that 'Sleek Black' look */
+    text-transform: uppercase;
+    letter-spacing: 0.5em;    /* Keeps the high-end editorial feel */
+    color: #000000;           /* Solid Black */
+    
+    /* Alignment Fixes */
+    text-align: left;         /* Forces it to the left */
+    margin-bottom: 3rem;
+    display: block;
+    
+    /* Subtle Inner Shadow to match your request */
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
+    
+    /* Optional: Small accent line to ground it to the left margin */
+    border-left: 4px solid #000000;
+    padding-left: 1.5rem;
+}
+
+/* Ensure the parent section doesn't force centering */
+.projects-section {
+    text-align: left;
+    padding: 120px 0;
+}
+
+/* Partial Navbar Border */
+.navbar::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 5%; /* Starts 5% in */
+    width: 90%; /* Ends 5% early */
+    height: 1px;
+    background: #000000;
+    opacity: 0.1; /* Keeps it subtle/sleek */
 }
 
 /* NEW: Mobile Menu Toggle Button (Hamburger) */
@@ -117,11 +158,27 @@ body {
 .mobile-menu-toggle.active span:nth-child(3) {
 	transform: rotate(-45deg) translate(7px, -7px);
 }
+
+
+/* HERO PAGE */
+
+
+
 .hero-minimalist {
     background-color: #F8F5F0; 
-    min-height: 100vh;
-    padding-top: 120px; /* Space for fixed navbar */
-    display: block; /* Overriding previous flex */
+    min-height: 85vh; /* Changed from 100vh to bring projects up */
+    padding-top: 120px; 
+    display: flex;
+    flex-direction: column;
+}
+
+
+.hero-top-left {
+    padding-top: 50px; /* Adjust this to move the name further down */
+    /* If you want it further left than the rest of the content: */
+    position: relative;
+    left: -150px; 
+	display: inline-block;
 }
 
 /* 1. Global Container - The "Safety Rail" */
@@ -152,11 +209,22 @@ body {
 }
 
 .hero-tagline {
-    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem; /* Smaller font makes letter-spacing look sleeker */
     text-transform: uppercase;
-    letter-spacing: 4px;
     color: #64748B;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    
+    /* THE STRETCH: Adjust this number to hit the 'd' exactly */
+    letter-spacing: 0.46rem; 
+    
+    /* Ensure it doesn't wrap to a new line */
+    white-space: nowrap;
+    display: block;
+    
+    /* Optional: Slight inner shadow to match your new header style */
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.02);
+}
 }
 
 .gold-dot { color: #FFD700; margin: 0 10px; }
@@ -281,10 +349,14 @@ section h2 {
 	margin: 0 auto 4rem;
 	line-height: 1.8;
 }
+
+
+
+
 /* --- PROJECTS SECTION REAMP --- */
 .projects-section {
-    background-color: #F8F5F0; /* Keep the cream background */
-    padding: 100px 0;
+    background-color: #F8F5F0;
+    padding: 40px 0 100px 0; /* Reduced top padding from 100px to 40px */
 }
 
 .project-grid {
@@ -1136,3 +1208,5 @@ footer p {
 		padding: 0.35rem 0.8rem;
 	}
 }
+
+

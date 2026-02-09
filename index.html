@@ -15,8 +15,7 @@
 			<div class="navbar-title">
 				<a href="#home">
 					<div class="logo-badge">
-						<span class="logo-first">Ross</span>
-						<span class="logo-last">Crawford</span>
+						<span class="logo-first">Home</span>
 					</div>
 				</a>
 			</div>
@@ -46,7 +45,7 @@
 
 			<div class="hero-bottom-right">
 				<div class="minimal-growth-card">
-					<p>Scaling healthcare through <em>active learning</em>. Committed to becoming a high-impact contributor while mastering LLM orchestration.</p>
+					<p>Scaling healthcare through active learning. Committed to becoming a high-impact contributor while mastering LLM orchestration.</p>
 					<div class="hero-actions">
 						<a href="#projects" class="text-link">View Work →</a>
 					</div>
@@ -57,7 +56,7 @@
 
 	<section id="projects" class="projects-section">
 	<div class="container">
-		<h2>Featured Projects</h2>
+		<h2 class="section-title">Featured Projects</h2>
 		<p class="section-description">Technical projects solving real problems I encountered in healthcare coordination work.</p>
 		
 		<div class="projects-grid">
@@ -339,6 +338,52 @@
 				}
 			});
 		}
+		
+		const observerOptions = { threshold: 0.1 };
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.style.opacity = "1";
+					entry.target.style.transform = "translateY(0)";
+				}
+			});
+		}, observerOptions);
+
+		document.querySelectorAll('section').forEach(section => {
+			section.style.opacity = "0";
+			section.style.transform = "translateY(30px)";
+			section.style.transition = "all 0.8s ease-out";
+			observer.observe(section);
+		});
+		
+		
+		const revealOnScroll = () => {
+			const sections = document.querySelectorAll('section, .project-card');
+			
+			sections.forEach(section => {
+				const sectionTop = section.getBoundingClientRect().top;
+				const triggerPoint = window.innerHeight * 0.8;
+				
+				if (sectionTop < triggerPoint) {
+					section.style.opacity = "1";
+					section.style.transform = "translateY(0)";
+				}
+			});
+		};
+
+	// Initial state for sections
+	document.querySelectorAll('section, .project-card').forEach(el => {
+		el.style.opacity = "0";
+		el.style.transform = "translateY(30px)";
+		el.style.transition = "all 0.8s cubic-bezier(0.2, 1, 0.3, 1)";
+	});
+
+	window.addEventListener('scroll', revealOnScroll);
+	window.addEventListener('load', revealOnScroll);
+
+
+
 	</script>
 </body>
 </html>

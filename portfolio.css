@@ -157,10 +157,9 @@ body {
 /* HERO PAGE */
 
 
-
 .hero-minimalist {
     background-color: #F8F5F0; 
-    min-height: 70vh; /* Changed from 100vh to bring projects up */
+    min-height: 70vh;
     padding-top: 80px; 
     display: flex;
     flex-direction: column;
@@ -168,28 +167,27 @@ body {
 
 
 .hero-top-left {
-    padding-top: 40px; /* Adjust this to move the name further down */
+    padding-top: 40px; 
 	margin-left: -10px;
-    /* If you want it further left than the rest of the content: */
     position: relative;
     left: -150px; 
 	display: inline-block;
 }
 
-/* 1. Global Container - The "Safety Rail" */
+/* 1. Global Container */
 .container {
-    max-width: 1200px; /* Reduces width to keep content more central */
-    margin: 0 auto;    /* Centers the container */
-    padding: 0 2rem;   /* Prevents touching the edge on mobile */
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 2rem; 
 }
 
 /* 2. Hero Grid Adjustment */
 .hero-editorial-grid {
     display: flex;
-    flex-direction: row;        /* Changed from column to get horizontal separation */
+    flex-direction: row; 
     justify-content: space-between; 
-    align-items: stretch;       /* Allows internal items to use different alignments */
-    height: 70vh;               /* Adjust this to control vertical separation */
+    align-items: stretch;
+    height: 70vh;
     padding-top: 100px;
 }
 
@@ -205,30 +203,28 @@ body {
 }
 
 .hero-tagline {
+    display: flex;
+    justify-content: space-between; 
+    width: 98%;
+	margin:0.5rem auto 0;
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem; /* Smaller font makes letter-spacing look sleeker */
+    font-size: clamp(0.7rem, 1.2vw, 0.9rem); 
     text-transform: uppercase;
     color: #64748B;
     margin-top: 0.5rem;
-    
-    /* THE STRETCH: Adjust this number to hit the 'd' exactly */
-    letter-spacing: 0.46rem; 
-    
-    /* Ensure it doesn't wrap to a new line */
-    white-space: nowrap;
-    display: block;
-    
-    /* Optional: Slight inner shadow to match your new header style */
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.02);
+    letter-spacing: normal; 
+}
+.hero-tagline .gold-dot {
+    color: #FFD700;
+    font-weight: bold;
 }
 
 .gold-dot { color: #FFD700; margin: 0 10px; }
 
-/* Positioning the card at the bottom right */
 .hero-bottom-right {
-    align-self: flex-end; /* Pushes to the right */
+    align-self: flex-end;
     max-width: 400px;
-    margin-top: auto; /* Pushes to the bottom */
+    margin-top: auto;
 }
 
 .minimal-growth-card {
@@ -254,8 +250,6 @@ body {
     color: #8AB4F8;
 }
 
-
-
 /* Section Styling */
 section {
 	padding: 6rem 0;
@@ -279,12 +273,10 @@ section h2 {
 }
 
 
-
-
-/* --- PROJECTS SECTION REAMP --- */
+/* --- PROJECTS SECTION --- */
 .projects-section {
     background-color: #F8F5F0;
-    padding: 40px 0 100px 0; /* Reduced top padding from 100px to 40px */
+    padding: 40px 0 100px 0;
 }
 
 .project-grid {
@@ -294,11 +286,11 @@ section h2 {
     margin-top: 4rem;
 }
 
-/* THE CARD: Clean & Airy */
+
 .project-card {
-    background: #FFFFFF; /* Pure white card on cream background */
+    background: #FFFFFF;
     border: 1px solid rgba(30, 41, 59, 0.05);
-    border-radius: 4px; /* Slight rounding for a modern look */
+    border-radius: 4px;
     padding: 2.5rem;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     display: flex;
@@ -309,7 +301,7 @@ section h2 {
 .project-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(30, 41, 59, 0.08);
-    border-color: #8AB4F8; /* Light blue highlight on hover */
+    border-color: #8AB4F8;
 }
 
 /* CARD TYPOGRAPHY */
@@ -328,12 +320,12 @@ section h2 {
     margin-bottom: 2rem;
 }
 
-/* TAGS: Minimalist */
+/* TAGS*/
 .project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: auto; /* Pushes tags to bottom */
+    margin-top: auto;
     margin-bottom: 1.5rem;
 }
 
@@ -342,7 +334,7 @@ section h2 {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
-    color: #8AB4F8; /* Your Light Blue */
+    color: #8AB4F8;
     background: rgba(138, 180, 248, 0.1);
     padding: 4px 10px;
     border-radius: 2px;
@@ -358,7 +350,7 @@ section h2 {
     font-weight: 700;
     font-size: 0.85rem;
     color: #1E293B;
-    border-bottom: 2px solid #FFD700; /* Gold underline for secondary accent */
+    border-bottom: 2px solid #FFD700;
     transition: all 0.2s;
 }
 
@@ -367,11 +359,10 @@ section h2 {
     border-bottom-color: #8AB4F8;
 }
 
-
 /* Skills Section */
 
 .skills-section {
-    background-color: #F8F5F0; /* Matching your cream base */
+    background-color: #F8F5F0;
     padding: 120px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -389,25 +380,25 @@ section h2 {
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem; /* Increased for breathing room */
-    padding: 2rem 0; /* Space at top/bottom for the cards to 'jump' into */
+    gap: 1.5rem;
+    padding: 2rem 0;
 }
 
 .skill-category {
     background: transparent;
     padding: 2.5rem;
-    border-radius: 20px; /* Smooth, modern corners */
+    border-radius: 20px;
     border: 1px solid transparent;
-    transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1); /* Professional 'snap' */
+    transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
     position: relative;
-    overflow: hidden; /* Clips the glow effect */
+    overflow: hidden;
 }
 
 .skill-category:hover {
     outline: 1px solid rgba(0, 0, 0, 0.1);
-    outline-offset: 10px; /* This keeps the border AWAY from the text */
+    outline-offset: 10px;
     transform: translateY(-8px);
 }
 
@@ -421,7 +412,7 @@ section h2 {
     color: #475569;
     font-size: 0.95rem;
     transition: color 0.3s ease;
-    transform: none !important; /* Stop the text from sliding right */
+    transform: none !important;
 }
 
 .skill-category:hover li {
@@ -429,7 +420,7 @@ section h2 {
 }
 
 .skill-category li::before {
-    content: none !important; /* Removes the '▸' marker */
+    content: none !important;
 }
 
 
@@ -569,7 +560,6 @@ section h2 {
 }
 
 
-
 footer {
     background-color: #F8F5F0;
     color: #64748B;
@@ -627,7 +617,6 @@ footer {
 		text-align: center;
 		font-size: 1.1rem;
 		border-bottom: 1px solid rgba(138, 180, 248, 0.2);
-		/* NEW: Larger touch target on mobile */
 		min-height: 56px;
 		display: flex;
 		align-items: center;
@@ -654,7 +643,7 @@ footer {
 	}
     
     .hero-bottom-right {
-        align-self: flex-start; /* Aligns card to the left on mobile */
+        align-self: flex-start;
     }
 	
 	.hero-tagline {
@@ -766,13 +755,11 @@ footer {
 		font-size: 0.95rem;
 	}
 	
-	/* Project buttons stack vertically on very small screens */
 	.project-btn {
 		width: 100%;
 		min-width: 100%;
 	}
 	
-	/* Tags wrap better on small screens */
 	.tag {
 		font-size: 0.8rem;
 		padding: 0.35rem 0.75rem;

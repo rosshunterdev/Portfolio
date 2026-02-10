@@ -212,8 +212,9 @@ body {
     text-transform: uppercase;
     color: #64748B;
     margin-top: 0.5rem;
-    letter-spacing: normal; 
+    letter-spacing: normal;
 }
+
 .hero-tagline .gold-dot {
     color: #FFD700;
     font-weight: bold;
@@ -514,12 +515,14 @@ section h2 {
     flex-direction: column;
     gap: 3rem;
     margin-top: 4rem;
+	align-items:center;
 }
 
 .contact-item {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: centre;
+	text-align:centre;
 }
 
 .contact-label {
@@ -538,6 +541,7 @@ section h2 {
     border-bottom: 1px solid rgba(0,0,0,0.1);
     padding-bottom: 4px;
     transition: all 0.3s ease;
+	display:inline-block;
 }
 
 .contact-link:hover {
@@ -647,9 +651,10 @@ footer {
     }
 	
 	.hero-tagline {
-		white-space: normal;
-		letter-spacing: 0.2rem;
-		max-width: 100%;
+		white-space: normal !important;   /* Allows text to wrap to the next line */
+		letter-spacing: 0.1rem !important; /* Shrinks the width so it fits screens */
+		display: inline-block;             /* Keeps the 'shrink-wrap' width */
+		max-width: 100%;                   /* Ensures it never exceeds the screen */
 	}
 	
 

@@ -297,13 +297,42 @@ section h2 {
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+	transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.4s ease;
 }
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(30, 41, 59, 0.08);
-    border-color: #8AB4F8;
+	box-shadow: 0 15px 35px rgba(30, 41, 59, 0.12); /* Adds depth shadow */
+    border-color: #8C786A;
 }
+
+.project-card.has-image .project-image {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.project-card.has-image .project-image img {
+    transition: transform 0.6s ease;
+}
+
+.project-card.has-image:hover .project-image img {
+    transform: scale(1.01); /* Subtle 5% zoom */
+}
+
+
+.project-image img {
+    width: 100%;           /* Forces it to fill the width */
+    height: 300px;         /* Forces a consistent height across all cards */
+    object-fit: cover;     /* Crops the image to fit the box without stretching */
+    object-position: top;  /* Ensures the top of the website/app is visible */
+    
+    /* Retain your previous styles */
+    border-radius: 8px;
+    border: 1px solid #E5E1DA; 
+    transition: transform 0.6s ease;
+}
+
 
 /* CARD TYPOGRAPHY */
 .project-card h3 {
@@ -368,54 +397,80 @@ section h2 {
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-
-.skills-section .section-description {
-    color: #64748B;
-    text-align: left;
-    margin-left: 0;
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin-bottom: 5rem;
+/* Center the Header across the grid */
+.skills-section h2 {
+    grid-column: 1 / -1; 
+    display: block;
+    width: fit-content;
 }
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    padding: 2rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
+/* THE CARD: Clean, single border outline */
 .skill-category {
-    background: transparent;
-    padding: 2.5rem;
-    border-radius: 20px;
-    border: 1px solid transparent;
-    transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-    display: flex;
-    flex-direction: column;
+    background: #FFFFFF;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(30, 41, 59, 0.1); /* Subtle single outline */
+    transition: transform 0.3s ease, border-color 0.3s ease;
     position: relative;
-    overflow: hidden;
+}
+
+/* Gold accent line to match hero dot */
+.skill-category::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #FFD700; 
+    border-radius: 8px 8px 0 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .skill-category:hover {
-    outline: 1px solid rgba(0, 0, 0, 0.1);
-    outline-offset: 10px;
-    transform: translateY(-8px);
+    transform: translateY(-5px);
+    /* Only color the sides and bottom, leaving the top transparent */
+    border-color: transparent #8C786A #8C786A #8C786A; 
 }
 
-.skill-category:hover::after {
-    transform: translateX(0);
+.skill-category:hover::before {
+    opacity: 1; /* Gold line still appears clearly */
+}
+
+.skill-category:hover::before {
+    opacity: 1;
+}
+
+.skill-category h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #1E293B;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 0.75rem;
+}
+
+/* Clean List: No backgrounds or individual borders */
+.skill-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .skill-category li {
-    list-style: none;
-    padding: 0.6rem 0;
-    color: #475569;
-    font-size: 0.95rem;
-    transition: color 0.3s ease;
-    transform: none !important;
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+    color: #64748B;
+    border: none !important; /* Removes the previous borders */
+    background: none !important; /* Removes the blue background */
 }
-
 .skill-category:hover li {
     color: #1E293B;
 }
@@ -806,4 +861,38 @@ footer {
 		font-size: 0.95rem;
 		line-height: 1.7;
 	}
+}
+
+
+/* --- ONLY AFFECTS CARDS WITH IMAGES --- */
+@media (min-width: 992px) {
+    .project-card.has-image {
+        display: flex;
+        flex-direction: row; /* Side-by-side */
+        align-items: center;
+        gap: 3rem;
+        grid-column: 1 / -1; /* Makes this card span the full width of the grid */
+    }
+
+    .project-card.has-image .project-content {
+        flex: 1.2; /* Gives text slightly more room */
+    }
+
+    .project-card.has-image .project-image {
+        flex: 1;
+        display: block;
+    }
+
+    .project-card.has-image .project-image img {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+}
+
+/* Mobile: Stack them regardless of class */
+@media (max-width: 991px) {
+    .project-card.has-image {
+        flex-direction: column;
+    }
 }

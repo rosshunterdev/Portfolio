@@ -7,6 +7,115 @@ body {
 	overflow-x:hidden;
 }
 
+
+
+/* BUTTONS */
+
+
+
+/*
+
+
+.resume-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 18px 45px;
+    border: 1px solid #000;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    letter-spacing: 2px; 
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.resume-button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+*/
+
+
+.btn-primary {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 18px 45px;
+    border: 1px solid #000;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+
+.btn-small-primary {
+	display: inline-block;
+	padding: 10px 25px;
+	border: 1px solid #000;
+	text-decoration: none;
+	color: #000;
+	font-weight: 500;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	transition: all 0.3s ease;
+	background-color: transparent;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.btn-small-primary:hover {
+	background-color: #000;
+	color: #fff;
+}
+
+/*
+8C786A
+
+8AB4F8
+
+4A4A4A
+
+2c3e50
+
+f4f4f4, e0e0e0
+*/
+
+.btn-small-secondary {
+	display: inline-block;
+	padding: 10px 25px;
+	border: 1px solid #fff;
+	text-decoration: none;
+	background-color: #2c3e50;
+	color: #fff;
+	font-weight: 500;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.btn-small-secondary:hover {
+	background-color: transparent;
+	color: #4A4A4A;
+	border: 1px solid #000;
+}
+
+
+
 /* --- CLEAN NAVBAR --- */
 .navbar {
     height: 80px;
@@ -167,11 +276,9 @@ body {
 
 
 .hero-top-left {
-    padding-top: 40px; 
-	margin-left: -10px;
-    position: relative;
-    left: -150px; 
-	display: inline-block;
+    padding-top: 40px;
+    display: inline-block;
+	margin-left: -20px; /* Moves the block 20px to the left */
 }
 
 /* 1. Global Container */
@@ -186,7 +293,7 @@ body {
     display: flex;
     flex-direction: row; 
     justify-content: space-between; 
-    align-items: stretch;
+    align-items: flex-start;
     height: 70vh;
     padding-top: 100px;
 }
@@ -221,6 +328,17 @@ body {
 }
 
 .gold-dot { color: #FFD700; margin: 0 10px; }
+
+
+/* Mobile Specific Adjustment */
+@media (max-width: 600px) {
+    .hero-tagline {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        padding: 0 20px;
+    }
+}
+
 
 .hero-bottom-right {
     align-self: flex-end;
@@ -372,7 +490,10 @@ section h2 {
 
 .project-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 12px;
+    margin-top: 20px;
+    margin-bottom: 30px; /* This creates the space before the image */
+    flex-wrap: wrap;    /* This stops buttons from overlapping on tiny screens */
 }
 
 .project-btn {
@@ -573,12 +694,15 @@ section h2 {
 	align-items:center;
 }
 
+/* The container for your contact info */
 .contact-item {
     display: flex;
     flex-direction: column;
-    align-items: centre;
-	text-align:centre;
+    align-items: center; /* CSS must use 'center' with an 'er' */
+    text-align: center;
+    margin-top: 40px;
 }
+
 
 .contact-label {
     font-size: 0.75rem;
@@ -894,5 +1018,72 @@ footer {
 @media (max-width: 991px) {
     .project-card.has-image {
         flex-direction: column;
+    }
+}
+
+/* This targets the section itself to push content inward */
+#home.hero-minimalist {
+    padding-left: 40px !important;  /* Adjust this number to your liking */
+    padding-right: 40px !important; /* Prevents bio from hitting the right edge too */
+    box-sizing: border-box;         /* Essential: keeps padding inside the width */
+}
+
+#home .container {
+    padding-left: 0;
+}
+
+
+/* =============================================
+   HERO RESPONSIVE FIX
+   ============================================= */
+
+/* Prevent hero from overflowing horizontally */
+.hero-minimalist {
+    overflow-x: hidden;
+}
+
+/* Constrain the name so it can't escape the container */
+.hero-top-left {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.hero-name {
+    white-space: normal;   /* Allow wrapping */
+    word-break: break-word;
+    max-width: 100%;
+}
+
+/* Fix letter-spacing at smaller sizes - 
+   negative letter spacing causes overflow on mobile */
+@media (max-width: 900px) {
+    .hero-name {
+        letter-spacing: -2px; /* Less aggressive at medium width */
+    }
+    
+    .hero-editorial-grid {
+        height: auto;        /* Don't force a fixed height */
+        min-height: 75vh;
+        padding-bottom: 4rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-name {
+        letter-spacing: -1px; /* Minimal at mobile */
+        font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+    
+    .hero-tagline {
+        letter-spacing: 2px; /* Reduce tagline spacing too */
+        font-size: 0.75rem;
+    }
+    
+    .hero-bottom-right {
+        align-self: flex-start; /* Don't push to the right on mobile */
+        max-width: 100%;
+        width: 100%;
+        margin-top: 3rem;
     }
 }

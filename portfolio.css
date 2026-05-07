@@ -457,8 +457,16 @@ section h2 {
     font-size: 1.5rem;
     color: #1E293B;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem;
     letter-spacing: -0.5px;
+}
+
+.project-subtitle {
+    font-size: 0.85rem;
+    color: #94A3B8;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.02em;
 }
 
 .project-description {
@@ -540,6 +548,7 @@ section h2 {
     border: 1px solid rgba(30, 41, 59, 0.1); /* Subtle single outline */
     transition: transform 0.3s ease, border-color 0.3s ease;
     position: relative;
+    text-align: center;
 }
 
 /* Gold accent line to match hero dot */
@@ -632,6 +641,37 @@ section h2 {
     color: #1E293B;
     line-height: 1.4;
     margin-bottom: 2rem;
+}
+
+.about-text {
+    background: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(30, 41, 59, 0.1);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    position: relative;
+}
+
+.about-text::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #FFD700;
+    border-radius: 8px 8px 0 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.about-text:hover {
+    transform: translateY(-5px);
+    border-color: transparent #8C786A #8C786A #8C786A;
+}
+
+.about-text:hover::before {
+    opacity: 1;
 }
 
 .about-text p {

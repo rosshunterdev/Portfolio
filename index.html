@@ -83,42 +83,26 @@
 		</div>
 	</section>
 
-	<div class="main-layout">
-		<aside class="sidebar-nav" aria-label="Section navigation">
-			<ul class="sidebar-links">
-				<li><a href="#about" class="sidebar-link">About</a></li>
-				<li>
-					<a href="#projects" class="sidebar-link">Projects</a>
-					<ul class="sidebar-sub-links">
-						<li><a href="#client-work" class="sidebar-sublink">Client work</a></li>
-						<li><a href="#other-projects" class="sidebar-sublink">Other projects</a></li>
-					</ul>
-				</li>
-				<li><a href="#skills" class="sidebar-link">Skills</a></li>
-				<li><a href="#contact" class="sidebar-link">Contact</a></li>
-			</ul>
-		</aside>
-		<div class="main-content">
-
 	<section id="about" class="about-minimal">
 		<div class="container">
-			<div class="about-grid">
-				<div class="about-card">
-					<span class="about-card-label">Background</span>
-					<p>I have a psychology degree and three years in disability and mental health support. I got into development to build for businesses that do good, and to fill gaps I kept seeing in the fields I worked in.</p>
-				</div>
-				<div class="about-card">
-					<span class="about-card-label">Approach</span>
-					<p>Most developers haven't worked in the fields their software is meant to serve. I have, and that changes how I build.</p>
-					<p>My projects reflect that: task management built around how ADHD brains actually work, tools for support workers that address gaps I saw firsthand, websites built with care.</p>
-				</div>
+			<h2 class="section-title">About</h2>
+		</div>
+		<div class="container about-grid">
+			<div class="about-card">
+				<span class="about-card-label">Background</span>
+				<p>I have a psychology degree and three years in disability and mental health support. I got into development to build for businesses that do good, and to fill gaps I kept seeing in the fields I worked in.</p>
+			</div>
+			<div class="about-card">
+				<span class="about-card-label">Approach</span>
+				<p>Most developers haven't worked in the fields their software is meant to serve. I have, and that changes how I build.</p>
+				<p>My projects reflect that: task management built around how ADHD brains actually work, tools for support workers that address gaps I saw firsthand, websites built with care.</p>
 			</div>
 		</div>
 	</section>
 
 	<section id="projects" class="projects-section">
 		<div class="container">
-			<h2 id="client-work" class="section-title">Selected client work</h2>
+			<h2 class="section-title">Selected client work</h2>
 			<p class="section-description">Live websites built for real businesses.</p>
 
 			<div class="projects-grid projects-grid--featured">
@@ -173,7 +157,7 @@
 
 			</div>
 
-			<h2 id="other-projects" class="section-title section-title--secondary">Other projects</h2>
+			<h2 class="section-title section-title--secondary">Other projects</h2>
 			<p class="section-description">Personal builds, design exploration, and academic work.</p>
 
 			<div class="projects-grid projects-grid--secondary">
@@ -296,6 +280,9 @@
 
 	<section id="skills" class="skills-section">
 		<div class="container">
+			<h2>Skills</h2>
+			<p class="section-description">What I bring to the work.</p>
+
 			<div class="skills-grid">
 				<div class="skill-category">
 					<h3>Development</h3>
@@ -358,8 +345,6 @@
 		</div>
 	</section>
 
-		</div><!-- end main-content -->
-	</div><!-- end main-layout -->
 
 	<footer>
 		<div class="container">
@@ -370,16 +355,18 @@
 	<script>
 		document.documentElement.classList.add('js-loaded');
 
-		// Smooth scrolling with navbar offset
+		// Smooth scrolling for navigation links
 		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 			anchor.addEventListener('click', function (e) {
 				e.preventDefault();
-				const targetId = this.getAttribute('href').slice(1);
-				const target = document.getElementById(targetId);
+				const target = document.querySelector(this.getAttribute('href'));
 				if (target) {
-					const top = target.getBoundingClientRect().top + window.scrollY - 90;
-					window.scrollTo({ top, behavior: 'smooth' });
+					target.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
 
+					// Close mobile menu after clicking a link
 					const mobileMenu = document.querySelector('.navbar-headers');
 					const menuToggle = document.querySelector('.mobile-menu-toggle');
 					if (mobileMenu && menuToggle && mobileMenu.classList.contains('active')) {
@@ -391,37 +378,6 @@
 				}
 			});
 		});
-
-		// Sidebar scrollspy
-		const sidebarSectionIds = ['about', 'projects', 'client-work', 'other-projects', 'skills', 'contact'];
-		const allSidebarLinks = document.querySelectorAll('.sidebar-link, .sidebar-sublink');
-
-		function updateSidebar() {
-			const scrollY = window.scrollY;
-			const offset = 110;
-			let current = '';
-
-			for (const id of sidebarSectionIds) {
-				const el = document.getElementById(id);
-				if (!el) continue;
-				if (scrollY + offset >= el.getBoundingClientRect().top + scrollY) {
-					current = id;
-				}
-			}
-
-			allSidebarLinks.forEach(l => l.classList.remove('active'));
-
-			const activeLink = document.querySelector(`.sidebar-link[href="#${current}"], .sidebar-sublink[href="#${current}"]`);
-			if (activeLink) activeLink.classList.add('active');
-
-			if (current === 'projects' || current === 'client-work' || current === 'other-projects') {
-				const projectsLink = document.querySelector('.sidebar-link[href="#projects"]');
-				if (projectsLink) projectsLink.classList.add('active');
-			}
-		}
-
-		window.addEventListener('scroll', updateSidebar, { passive: true });
-		updateSidebar();
 
 		// Mobile menu toggle functionality
 		const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

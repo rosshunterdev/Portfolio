@@ -65,7 +65,7 @@
 				<p class="cs-eyebrow">Client case study</p>
 				<h1>Drama Geeks</h1>
 				<p class="cs-hero-subtitle">Performing arts school, South Shields UK</p>
-				<p class="cs-hero-outcome">Full redesign and rebuild — from a tired multi-page site to a warm, trust-building presence that converts parents into bookings.</p>
+				<p class="cs-hero-outcome">Full redesign and rebuild; from an unpolished multi-page site to a warm, trust-building presence that's comfortable to use and represents Drama Geeks the way it deserves to be.</p>
 				<a href="https://drama-geeks-v2.netlify.app/" class="btn-primary" target="_blank">View live site</a>
 			</section>
 
@@ -89,24 +89,57 @@
 			<section class="cs-section">
 				<h2 class="cs-section-label">The brief</h2>
 				<div class="cs-section-body">
-					<p>Charlotte runs Drama Geeks, a performing arts school for children in South Shields. The existing site was functional but wrong in feel — corporate in tone where the school is warm and community-oriented, and scattered in structure where parents needed clarity. Finding class schedules, fees, or how to actually book a place required too much effort.</p>
-					<p>The brief was straightforward in principle and demanding in execution: make parents feel welcome the moment they land, and give them a clear, obvious path to enrolment. The school's reputation is built on personal connection; the site needed to reflect that.</p>
-					<p>Mobile experience was non-negotiable. Most parents in this demographic browse on phones — often quickly, while distracted. Every decision had to work at 375px before it worked anywhere else.</p>
+					<p>Charlotte runs Drama Geeks, a performing arts school for children in South Shields. The existing site was unpolished. Finding class schedules, fees, or how to actually book a place required too much effort.</p>
+					<p>There was no formal brief. I worked from the old site, figured out what was missing, and built something that addressed it. Charlotte needed parents to land on the site and know immediately they were in the right place.</p>
+					<p>Mobile was a priority. Most parents in this demographic browse on phones; effort went into making sure the experience held up at every screen size.</p>
 				</div>
 			</section>
 
 			<!-- My approach -->
 			<section class="cs-section">
-				<h2 class="cs-section-label">My approach</h2>
+				<h2 class="cs-section-label">Brand and tone</h2>
 				<div class="cs-section-body">
-					<h3>Brand and tone</h3>
-					<p>The redesign led with warmth — a diagonal hero composition, soft cream backgrounds, and a Fraunces/Poppins type pairing that balances character with legibility. The colour palette (cream, near-black, warm blue, and accent yellow) was drawn from the school's visual identity and pushed toward something that reads friendly rather than institutional.</p>
-					<h3>Information architecture</h3>
-					<p>I restructured the site around the three questions parents actually ask first: can my child try a class, what does it cost, and when and where does it happen. Class pages, a clear fees breakdown, and a show listings section each got their own space rather than being buried in walls of text.</p>
-					<h3>Conversion flow</h3>
-					<p>The booking and contact paths were made frictionless — clear calls to action on every page, a contact form that does not ask for more than necessary, and a booking flow that points parents to the right place without making them hunt.</p>
-					<h3>Mobile-first build</h3>
-					<p>The site was built mobile-first throughout. Navigation collapses cleanly, images scale appropriately, and the most important information — class times, fees, contact — surfaces at the top of the flow on small screens.</p>
+					<p>The redesign prioritised warmth over the feel of the previous site. A Fraunces/Poppins pairing; one for character, one for readability. The base palette of cream, near-black, warm blue, and accent yellow was drawn from the school's existing identity.</p>
+					<p>Then I went a bit colour-crazy: each class category got its own accent colour. Mini Geeks gets pink, Drama Geeks gets amber, DG Associates gets purple.</p>
+				</div>
+			</section>
+
+			<!-- Information architecture -->
+			<section class="cs-section">
+				<h2 class="cs-section-label">Information architecture</h2>
+				<div class="cs-section-body">
+					<p>The site has 23 pages, restructured around the three questions parents actually ask first: can my child try a class, what does it cost, and when and where does it happen.</p>
+					<p>Each class tier got its own page. Fees got its own page. Productions, workshops, gallery, and a full about section each sit in their own space rather than being buried in walls of text. The nav reflects this; a two-tier structure with a mega menu for classes, dropdowns for About and Families and Carers, and a persistent "Book a Free Trial" pill button that follows the user everywhere.</p>
+					<p>The classes overview includes a comparison table across all five class tiers; age range, skills, duration, venue, and price. One place, everything a parent needs to make a decision.</p>
+				</div>
+			</section>
+
+			<!-- Conversion flow -->
+			<section class="cs-section">
+				<h2 class="cs-section-label">Conversion flow</h2>
+				<div class="cs-section-body">
+					<p>"Book a Free Trial" appears in the desktop nav, the mobile nav, the homepage hero, the footer, and at the end of every major page. It always points to the same place; a dedicated booking form on the contact page.</p>
+					<p>The contact page has two forms; one for trial bookings, one for general enquiries. The booking form collects parent name, email, child name, child age, and preferred class.</p>
+				</div>
+			</section>
+
+			<!-- Mobile -->
+			<section class="cs-section">
+				<h2 class="cs-section-label">Mobile</h2>
+				<div class="cs-section-body">
+					<p>The site has six breakpoints from 900px down to 480px, each handling specific layout shifts rather than just collapsing columns.</p>
+					<p>The mobile nav opens as a full-viewport cream overlay with expandable sections for each dropdown category and a "Book a Free Trial" button pinned at the bottom.</p>
+					<p>Fluid sizing via clamp() is used throughout, so most transitions between breakpoints are continuous rather than abrupt. The photo marquee on the homepage handles both mouse drag and touch events.</p>
+				</div>
+			</section>
+
+			<!-- Technical decisions -->
+			<section class="cs-section">
+				<h2 class="cs-section-label">Technical decisions</h2>
+				<div class="cs-section-body">
+					<p>The nav and footer are external HTML fragments injected at runtime via JavaScript; with 23 pages it was the only sensible approach.</p>
+					<p>Per-class colour theming is handled via a single body class on each page. CSS descendant selectors do the rest; accent colours, tint surfaces, hover states, and borders all update from one class switch. Adding a new class tier in future means adding one body class and one block of overrides, nothing else.</p>
+					<p>Scroll reveal uses an IntersectionObserver with a progressive enhancement approach; a js-loaded class is added to the HTML element immediately, and CSS only applies the hidden initial state when that class exists. If JavaScript is off, everything is visible. Transitions are also disabled entirely for users who have prefers-reduced-motion set.</p>
 				</div>
 			</section>
 
@@ -123,18 +156,70 @@
 				</div>
 			</section>
 
+			<!-- Insights -->
+			<section class="cs-section">
+				<h2 class="cs-section-label">Insights</h2>
+				<div class="cs-section-body">
+					<p>PageSpeed Insights scores, mobile, comparing the old site to the redesign.</p>
+					<div class="cs-metrics">
+						<div class="cs-metric-group">
+							<span class="cs-metric-era">Before</span>
+							<div class="cs-metric-scores">
+								<div class="cs-metric-item">
+									<span class="cs-metric-value">—</span>
+									<span class="cs-metric-name">Performance</span>
+								</div>
+								<div class="cs-metric-item">
+									<span class="cs-metric-value">—</span>
+									<span class="cs-metric-name">Accessibility</span>
+								</div>
+								<div class="cs-metric-item">
+									<span class="cs-metric-value">—</span>
+									<span class="cs-metric-name">Best Practices</span>
+								</div>
+								<div class="cs-metric-item">
+									<span class="cs-metric-value">—</span>
+									<span class="cs-metric-name">SEO</span>
+								</div>
+							</div>
+						</div>
+						<div class="cs-metric-group">
+							<span class="cs-metric-era">After</span>
+							<div class="cs-metric-scores">
+								<div class="cs-metric-item">
+									<span class="cs-metric-value">—</span>
+									<span class="cs-metric-name">Performance</span>
+								</div>
+								<div class="cs-metric-item">
+									<span class="cs-metric-value">—</span>
+									<span class="cs-metric-name">Accessibility</span>
+								</div>
+								<div class="cs-metric-item">
+									<span class="cs-metric-value">—</span>
+									<span class="cs-metric-name">Best Practices</span>
+								</div>
+								<div class="cs-metric-item">
+									<span class="cs-metric-value">—</span>
+									<span class="cs-metric-name">SEO</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<!-- Outcome -->
 			<section class="cs-section">
 				<h2 class="cs-section-label">Outcome</h2>
 				<div class="cs-section-body">
-					<p>The site went live in 2025 and replaced the old presence entirely. It is now the primary public face of Drama Geeks — the first thing parents see when they search for the school, and the place Charlotte points prospective families when they get in touch.</p>
+					<p>The site is launching in 2025 and will replace the old presence entirely; becoming the primary public face of Drama Geeks and the first thing parents see when they search for the school.</p>
 				</div>
 			</section>
 
-			<!-- Closing CTA -->
-			<div class="cs-cta">
-				<p>Working on something similar?</p>
-				<a href="mailto:ross.hunter.crawford@gmail.com">ross.hunter.crawford@gmail.com →</a>
+			<!-- Back to projects -->
+			<div class="cs-back">
+				<a href="index.html#projects" class="btn-primary">← Back to projects</a>
+				<a href="index.html#contact" class="btn-ghost">Get in touch</a>
 			</div>
 
 		</div>

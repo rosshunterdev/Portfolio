@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Page not found · Ross Crawford</title>
+	<meta name="robots" content="noindex">
+	<link rel="stylesheet" href="portfolio.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,900&family=Inter:ital,wght@0,200;0,400;0,700;1,200&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/svg+xml" href="favicon.svg">
+	<link rel="icon" type="image/png" href="favicon.png">
+	<style>
+		.error-page {
+			min-height: calc(100vh - 80px);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: var(--space-xl) var(--space-md);
+			text-align: center;
+		}
+
+		.error-body {
+			max-width: 520px;
+		}
+
+		.error-code {
+			font-family: var(--font-display);
+			font-size: clamp(6rem, 20vw, 10rem);
+			font-weight: 300;
+			font-optical-sizing: auto;
+			color: var(--color-accent);
+			line-height: 1;
+			margin: 0 0 1.5rem;
+		}
+
+		.error-body h1 {
+			font-family: var(--font-sans);
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--color-ink);
+			margin: 0 0 1rem;
+			letter-spacing: -0.02em;
+		}
+
+		.error-body p {
+			font-size: 1rem;
+			color: var(--color-ink-muted);
+			line-height: 1.7;
+			margin: 0;
+		}
+
+		.error-body .btn-primary {
+			margin-top: var(--space-md);
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar" aria-label="Main Navigation">
+		<div class="navbar-container">
+			<div class="navbar-logo">
+				<a href="index.html" class="logo-link">Home</a>
+			</div>
+
+			<button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false">
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+			</button>
+
+			<ul class="navbar-headers" role="list">
+				<li><a href="index.html#about" class="nav-link">About</a></li>
+				<li><a href="index.html#projects" class="nav-link">Projects</a></li>
+				<li><a href="index.html#skills" class="nav-link">Skills</a></li>
+				<li><a href="index.html#contact" class="nav-link">Contact</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<main class="error-page">
+		<div class="error-body">
+			<p class="error-code">404</p>
+			<h1>This page does not exist.</h1>
+			<p>Either the link was wrong, or the page has moved. Either way, here is the way back.</p>
+			<a href="index.html" class="btn-primary">Back to home</a>
+		</div>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>&copy; 2026 Ross Crawford. Designing software for human needs.</p>
+		</div>
+	</footer>
+
+	<script>
+		const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+		const navbarHeaders = document.querySelector('.navbar-headers');
+
+		if (mobileMenuToggle && navbarHeaders) {
+			mobileMenuToggle.addEventListener('click', function() {
+				const isExpanded = this.getAttribute('aria-expanded') === 'true';
+				this.classList.toggle('active');
+				navbarHeaders.classList.toggle('active');
+				this.setAttribute('aria-expanded', String(!isExpanded));
+				this.setAttribute('aria-label', isExpanded ? 'Open menu' : 'Close menu');
+			});
+
+			document.addEventListener('click', function(event) {
+				const isClickInsideNav = event.target.closest('.navbar-container');
+				if (!isClickInsideNav && navbarHeaders.classList.contains('active')) {
+					navbarHeaders.classList.remove('active');
+					mobileMenuToggle.classList.remove('active');
+					mobileMenuToggle.setAttribute('aria-expanded', 'false');
+					mobileMenuToggle.setAttribute('aria-label', 'Open menu');
+				}
+			});
+		}
+	</script>
+</body>
+</html>

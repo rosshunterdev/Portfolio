@@ -1,0 +1,229 @@
+/* ============================================================
+   CASE STUDY — page wrapper and container override
+   ============================================================ */
+
+.cs-page {
+	padding-top: 80px;
+}
+
+.cs-page .container {
+	max-width: 960px;
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.cs-hero {
+	padding: var(--space-xl) 0 var(--space-lg);
+	border-bottom: 1px solid var(--color-border);
+}
+
+.cs-eyebrow {
+	font-family: var(--font-sans);
+	font-size: 0.75rem;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
+	color: var(--color-ink-muted);
+	margin: 0 0 var(--space-sm);
+}
+
+.cs-hero h1 {
+	font-family: var(--font-display);
+	font-size: clamp(2.5rem, 7vw, 4.5rem);
+	font-weight: 300;
+	font-optical-sizing: auto;
+	letter-spacing: -1.5px;
+	color: var(--color-ink);
+	line-height: 1.05;
+	margin: 0 0 var(--space-xs);
+}
+
+.cs-hero-subtitle {
+	font-size: 1rem;
+	color: var(--color-ink-muted);
+	margin: 0 0 var(--space-md);
+}
+
+.cs-hero-outcome {
+	font-size: 1.1rem;
+	line-height: 1.65;
+	color: var(--color-ink);
+	max-width: 640px;
+	margin: 0 0 var(--space-md);
+}
+
+/* Override the top margin that btn-primary carries from portfolio.css */
+.cs-hero .btn-primary {
+	margin-top: 0;
+}
+
+
+/* ============================================================
+   META STRIP
+   ============================================================ */
+
+.cs-meta {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--space-md);
+	padding: var(--space-lg) 0;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.cs-meta-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+}
+
+.cs-meta-label {
+	font-size: 0.7rem;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	color: var(--color-ink-muted);
+}
+
+.cs-meta-value {
+	font-size: 1rem;
+	color: var(--color-ink);
+}
+
+
+/* ============================================================
+   SECTIONS — two-column label / body layout
+   ============================================================ */
+
+.cs-section {
+	display: grid;
+	grid-template-columns: 200px 1fr;
+	gap: var(--space-lg);
+	padding: var(--space-lg) 0;
+	border-bottom: 1px solid var(--color-border);
+	align-items: start;
+}
+
+.cs-section-label {
+	font-family: var(--font-display);
+	font-size: 1.1rem;
+	font-weight: 600;
+	font-optical-sizing: auto;
+	color: var(--color-ink);
+	margin: 0;
+	padding-top: 5px;
+	position: sticky;
+	top: 100px;
+}
+
+.cs-section-body p {
+	font-size: 1rem;
+	line-height: 1.8;
+	color: var(--color-ink);
+	margin: 0 0 1.25rem;
+}
+
+.cs-section-body p:last-child {
+	margin-bottom: 0;
+}
+
+.cs-section-body h4 {
+	font-size: 0.7rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	color: var(--color-accent);
+	margin: 1.75rem 0 0.5rem;
+}
+
+.cs-section-body h4:first-child {
+	margin-top: 0;
+}
+
+
+/* ============================================================
+   SELECTED SCREENS
+   ============================================================ */
+
+.cs-screens {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--space-md);
+}
+
+.cs-screens img {
+	width: 100%;
+	display: block;
+	border-radius: var(--radius-md);
+	border: 1px solid var(--color-border);
+	background-color: var(--color-surface);
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+}
+
+
+/* ============================================================
+   CLOSING CTA
+   ============================================================ */
+
+.cs-cta {
+	padding: var(--space-xl) 0 var(--space-lg);
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.75rem;
+}
+
+.cs-cta p {
+	font-size: 1rem;
+	color: var(--color-ink-muted);
+	margin: 0;
+}
+
+.cs-cta a {
+	font-family: var(--font-display);
+	font-size: clamp(1.25rem, 3vw, 1.75rem);
+	font-weight: 300;
+	font-optical-sizing: auto;
+	color: var(--color-ink);
+	text-decoration: none;
+	border-bottom: 2px solid var(--color-accent);
+	padding-bottom: 3px;
+	transition: all var(--transition-default);
+}
+
+.cs-cta a:hover {
+	border-bottom-color: var(--color-ink);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+	.cs-meta {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.cs-section {
+		grid-template-columns: 1fr;
+		gap: var(--space-sm);
+	}
+
+	.cs-section-label {
+		position: static;
+	}
+
+	.cs-screens {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 480px) {
+	.cs-meta {
+		grid-template-columns: 1fr;
+	}
+}

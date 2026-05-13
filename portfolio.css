@@ -61,6 +61,26 @@ body {
     border-radius: 2px;
 }
 
+/* Skip-to-content link — visually hidden until focused */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--space-sm);
+    z-index: 9999;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius-sm);
+}
+
+.skip-link:focus {
+    top: var(--space-xs);
+}
+
 
 /* ============================================================
    BUTTONS
@@ -180,6 +200,7 @@ body {
     z-index: 1000;
     display: flex;
     align-items: center;
+    transition: opacity 250ms ease;
 }
 
 .navbar-container {
@@ -726,9 +747,9 @@ section h2 {
 
 .main-layout {
     display: grid;
-    grid-template-columns: 160px minmax(0, 1fr);
+    grid-template-columns: 200px minmax(0, 1fr);
     align-items: start;
-    max-width: 1280px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 var(--space-md);
 }
@@ -753,68 +774,169 @@ section h2 {
     top: 100px;
     height: fit-content;
     padding-top: var(--space-xl);
-    padding-right: var(--space-md);
+    padding-left: var(--space-sm);
 }
 
+/* "INDEX" editorial label */
+.sidebar-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+    margin-bottom: 0.75rem;
+    padding-left: 36px;
+}
+
+/* Wrapper carries the spine pseudo-element and positions the progress fill */
+.sidebar-body {
+    position: relative;
+}
+
+/* Spine hairline — runs the full height of the link list */
+.sidebar-body::before {
+    content: '';
+    position: absolute;
+    left: 32px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-border);
+    pointer-events: none;
+}
+
+/* Accent fill — CSS custom property --scroll-progress (0→1) set by rAF listener */
+.sidebar-progress {
+    position: absolute;
+    left: 31.5px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--color-accent);
+    pointer-events: none;
+    transform: scaleY(var(--scroll-progress, 0));
+    transform-origin: top;
+}
+
+/* Link list — z-index: 1 ensures links and dot paint above the progress fill */
 .sidebar-links {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
+    position: relative;
+    z-index: 1;
 }
 
-.sidebar-links li {
-    display: flex;
-    flex-direction: column;
+/* Each row: [32px number] [name column] */
+.sidebar-links > li {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    grid-template-rows: auto auto;
+    align-items: start;
 }
 
+/* Section numbers — monospace, right-aligned up to the spine */
+.sidebar-links > li::before {
+    grid-column: 1;
+    grid-row: 1;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.7rem;
+    color: var(--color-ink-soft);
+    text-align: right;
+    padding-right: 8px;
+    padding-top: 0.4rem;
+    line-height: 1.4;
+    transition: color var(--transition-default);
+}
+
+.sidebar-links > li:nth-child(1)::before { content: "01"; }
+.sidebar-links > li:nth-child(2)::before { content: "02"; }
+.sidebar-links > li:nth-child(3)::before { content: "03"; }
+.sidebar-links > li:nth-child(4)::before { content: "04"; }
+
+.sidebar-links > li:has(.sidebar-link.active)::before {
+    color: var(--color-ink);
+}
+
+/* Section name — Fraunces, right of spine */
 .sidebar-link {
+    grid-column: 2;
+    grid-row: 1;
     font-family: var(--font-display);
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 400;
     font-optical-sizing: auto;
-    color: var(--color-ink-soft);
+    color: var(--color-ink-muted);
     text-decoration: none;
-    padding: 0.3rem 0;
-    transition: color var(--transition-default), transform var(--transition-default);
-    transform-origin: left center;
+    padding: 0.4rem 0 0.4rem 6px;
     display: block;
-    line-height: 1.2;
+    line-height: 1.4;
+    position: relative;
+    transition: color var(--transition-default);
 }
 
 .sidebar-link:hover {
-    color: var(--color-ink-muted);
+    color: var(--color-ink);
 }
 
 .sidebar-link.active {
     color: var(--color-ink);
-    transform: scale(1.1);
 }
 
+/* "You are here" dot — single element that slides between active link positions */
+.sidebar-dot {
+    position: absolute;
+    left: 29px;
+    top: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    opacity: 0;
+    transform: translateY(var(--dot-y, 0px));
+    transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.2s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes dot-pulse {
+    0%   { transform: translateY(var(--dot-y, 0px)) scale(1); }
+    40%  { transform: translateY(var(--dot-y, 0px)) scale(1.4); }
+    100% { transform: translateY(var(--dot-y, 0px)) scale(1); }
+}
+
+.sidebar-dot.is-clicking {
+    animation: dot-pulse 250ms ease-out forwards;
+}
+
+/* Sub-links: grid-template-rows collapse (0fr → 1fr) */
 .sidebar-sub-links {
+    grid-column: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+}
+
+.sidebar-sub-inner {
+    overflow: hidden;
     list-style: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.25s ease;
 }
 
 li:has(.sidebar-link.active) .sidebar-sub-links {
-    max-height: 80px;
-    opacity: 1;
+    grid-template-rows: 1fr;
 }
 
 .sidebar-sublink {
     display: block;
     font-family: var(--font-sans);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     color: var(--color-ink-soft);
     text-decoration: none;
-    padding: 0.2rem 0 0.2rem 0.6rem;
+    padding: 0.2rem 0;
     transition: color var(--transition-default);
     letter-spacing: 0.02em;
 }
@@ -825,6 +947,35 @@ li:has(.sidebar-link.active) .sidebar-sub-links {
 
 .sidebar-sublink.active {
     color: var(--color-ink-muted);
+}
+
+/* Tighter focus ring for the compact sidebar layout */
+.sidebar-link:focus-visible,
+.sidebar-sublink:focus-visible {
+    outline-offset: 2px;
+}
+
+/* Hover metadata: desktop pointer devices only, no touch */
+@media (hover: hover) and (min-width: 769px) {
+    .sidebar-link[data-meta]::after {
+        content: attr(data-meta);
+        position: absolute;
+        left: calc(100% + 12px);
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--font-sans);
+        font-size: 0.7rem;
+        font-style: italic;
+        color: var(--color-ink-soft);
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.2s ease 50ms;
+        pointer-events: none;
+    }
+
+    .sidebar-link[data-meta]:hover::after {
+        opacity: 1;
+    }
 }
 
 
@@ -938,6 +1089,29 @@ html.js-loaded .project-card {
         opacity: 1;
         transform: none;
         transition: none;
+    }
+}
+
+
+/* ============================================================
+   NAV HANDOFF
+   ============================================================ */
+
+@media (min-width: 769px) {
+    .sidebar-nav {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 350ms ease 100ms;
+    }
+
+    .nav-handoff-active .navbar {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .nav-handoff-active .sidebar-nav {
+        opacity: 1;
+        pointer-events: auto;
     }
 }
 
@@ -1182,6 +1356,7 @@ html.js-loaded .project-card {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
         scroll-behavior: auto !important;
     }
 

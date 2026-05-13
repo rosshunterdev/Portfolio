@@ -30,25 +30,26 @@
   <link rel="stylesheet" href="portfolio.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,900&family=Inter:ital,wght@0,200;0,400;0,700;1,200&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,900&family=Inter:ital,wght@0,200;0,400;0,700;1,200&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preload" as="image" href="dramageeks-img.png">
 </head>
 <body>
+	<a href="#main-content" class="skip-link">Skip to content</a>
 	<nav class="navbar" aria-label="Main Navigation">
 		<div class="navbar-container">
 			<div class="navbar-logo">
 				<a href="#home" class="logo-link">Home</a>
 			</div>
 
-			<button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false">
+			<button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-menu">
 				<span class="hamburger-line"></span>
 				<span class="hamburger-line"></span>
 				<span class="hamburger-line"></span>
 			</button>
 
-			<ul class="navbar-headers" role="list">
+			<ul class="navbar-headers" id="primary-menu" role="list">
 				<li><a href="#about" class="nav-link">About</a></li>
 				<li><a href="#projects" class="nav-link">Projects</a></li>
 				<li><a href="#skills" class="nav-link">Skills</a></li>
@@ -84,21 +85,27 @@
 	</section>
 
 	<div class="main-layout">
-		<aside class="sidebar-nav" aria-label="Section navigation">
-			<ul class="sidebar-links">
-				<li><a href="#about" class="sidebar-link">About</a></li>
-				<li>
-					<a href="#projects" class="sidebar-link">Projects</a>
-					<ul class="sidebar-sub-links">
-						<li><a href="#client-work" class="sidebar-sublink">Client work</a></li>
-						<li><a href="#other-projects" class="sidebar-sublink">Other projects</a></li>
-					</ul>
-				</li>
-				<li><a href="#skills" class="sidebar-link">Skills</a></li>
-				<li><a href="#contact" class="sidebar-link">Contact</a></li>
-			</ul>
-		</aside>
-		<div class="main-content">
+		<nav class="sidebar-nav" aria-label="Section navigation">
+			<span class="sidebar-label">Index</span>
+			<div class="sidebar-body">
+				<ul class="sidebar-links">
+					<li><a href="#about" class="sidebar-link" data-meta="psychology + 3 yrs frontline">About</a></li>
+					<li>
+						<a href="#projects" class="sidebar-link" data-meta="selected work, 2024–26">Projects</a>
+						<div class="sidebar-sub-links">
+							<ul class="sidebar-sub-inner">
+								<li><a href="#client-work" class="sidebar-sublink">Client work</a></li>
+								<li><a href="#other-projects" class="sidebar-sublink">Other projects</a></li>
+							</ul>
+						</div>
+					</li>
+					<li><a href="#skills" class="sidebar-link" data-meta="stack &amp; domain">Skills</a></li>
+					<li><a href="#contact" class="sidebar-link" data-meta="available Dec 2026">Contact</a></li>
+				</ul>
+				<div class="sidebar-progress" aria-hidden="true"></div>
+			</div>
+		</nav>
+		<div class="main-content" id="main-content">
 
 	<section id="about" class="about-minimal">
 		<div class="container">
@@ -281,11 +288,11 @@
 		</div>
 	</section>
 
+	<!-- TESTIMONIAL HIDDEN — awaiting quote from Charlotte (Drama Geeks)
 	<section class="testimonial-section">
 		<div class="container narrow-container">
 			<blockquote class="testimonial">
-				<!-- Placeholder — awaiting quote from Charlotte -->
-				<p class="testimonial-quote">"[Awaiting client testimonial]"</p>
+				<p class="testimonial-quote">"…"</p>
 				<footer class="testimonial-attr">
 					<span class="testimonial-name">Charlotte [Surname]</span>
 					<span class="testimonial-role">Drama Geeks, South Shields</span>
@@ -293,6 +300,7 @@
 			</blockquote>
 		</div>
 	</section>
+	-->
 
 	<section id="skills" class="skills-section">
 		<div class="container">
@@ -350,7 +358,8 @@
 				<div class="contact-secondary">
 					<a href="https://github.com/izanagi-dev" target="_blank" rel="noopener">GitHub</a>
 					<span class="dot">·</span>
-					<a href="https://www.linkedin.com/in/[your-linkedin-slug]" target="_blank" rel="noopener">LinkedIn</a>
+					<!-- TODO: add real LinkedIn URL before deploying -->
+					<span>LinkedIn</span>
 					<span class="dot">·</span>
 					<span>Wellington, New Zealand</span>
 				</div>
@@ -392,36 +401,147 @@
 			});
 		});
 
-		// Sidebar scrollspy
-		const sidebarSectionIds = ['about', 'projects', 'client-work', 'other-projects', 'skills', 'contact'];
-		const allSidebarLinks = document.querySelectorAll('.sidebar-link, .sidebar-sublink');
+		// === SIDEBAR SCROLLSPY + SLIDING DOT + SCROLL PROGRESS ===
+		const sidebarBody = document.querySelector('.sidebar-body');
 
-		function updateSidebar() {
-			const scrollY = window.scrollY;
-			const offset = 110;
-			let current = '';
+		// Single sliding dot — appended to .sidebar-body so it sits on the spine
+		const dot = document.createElement('div');
+		dot.className = 'sidebar-dot';
+		dot.setAttribute('aria-hidden', 'true');
+		if (sidebarBody) sidebarBody.appendChild(dot);
 
-			for (const id of sidebarSectionIds) {
-				const el = document.getElementById(id);
-				if (!el) continue;
-				if (scrollY + offset >= el.getBoundingClientRect().top + scrollY) {
-					current = id;
-				}
-			}
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (prefersReducedMotion) dot.style.transition = 'none';
 
-			allSidebarLinks.forEach(l => l.classList.remove('active'));
+		const mainSectionEls = ['about', 'projects', 'skills', 'contact']
+			.map(id => document.getElementById(id)).filter(Boolean);
 
-			const activeLink = document.querySelector(`.sidebar-link[href="#${current}"], .sidebar-sublink[href="#${current}"]`);
-			if (activeLink) activeLink.classList.add('active');
+		const sidebarLinkMap = {
+			about:    document.querySelector('.sidebar-link[href="#about"]'),
+			projects: document.querySelector('.sidebar-link[href="#projects"]'),
+			skills:   document.querySelector('.sidebar-link[href="#skills"]'),
+			contact:  document.querySelector('.sidebar-link[href="#contact"]'),
+		};
 
-			if (current === 'projects' || current === 'client-work' || current === 'other-projects') {
-				const projectsLink = document.querySelector('.sidebar-link[href="#projects"]');
-				if (projectsLink) projectsLink.classList.add('active');
-			}
+		const subLinkMap = {
+			'client-work':    document.querySelector('.sidebar-sublink[href="#client-work"]'),
+			'other-projects': document.querySelector('.sidebar-sublink[href="#other-projects"]'),
+		};
+
+		let activeSectionId = null;
+
+		function positionDot(link) {
+			if (!link || !sidebarBody) { dot.style.opacity = '0'; return; }
+			const linkRect = link.getBoundingClientRect();
+			const bodyRect = sidebarBody.getBoundingClientRect();
+			const centerY = linkRect.top - bodyRect.top + linkRect.height / 2 - 3;
+			dot.style.setProperty('--dot-y', `${centerY}px`);
+			dot.style.opacity = '1';
 		}
 
-		window.addEventListener('scroll', updateSidebar, { passive: true });
-		updateSidebar();
+		function setActiveSection(sectionId) {
+			if (sectionId === activeSectionId) return;
+			activeSectionId = sectionId;
+			Object.values(sidebarLinkMap).forEach(l => {
+				if (!l) return;
+				l.classList.remove('active');
+				l.removeAttribute('aria-current');
+			});
+			Object.values(subLinkMap).forEach(l => l && l.classList.remove('active'));
+			if (!sectionId) { dot.style.opacity = '0'; return; }
+			const link = sidebarLinkMap[sectionId];
+			if (link) {
+				link.classList.add('active');
+				link.setAttribute('aria-current', 'location');
+			}
+			positionDot(link || null);
+		}
+
+		function setActiveSubLink(subId) {
+			Object.values(subLinkMap).forEach(l => l && l.classList.remove('active'));
+			if (subId && subLinkMap[subId]) subLinkMap[subId].classList.add('active');
+		}
+
+		// Track scroll direction so IO disambiguation is reliable for both
+		// tall sections and short <h2> headings
+		let scrollDir = 'down';
+		let prevScrollY = window.scrollY;
+		window.addEventListener('scroll', () => {
+			scrollDir = window.scrollY >= prevScrollY ? 'down' : 'up';
+			prevScrollY = window.scrollY;
+		}, { passive: true });
+
+		// Main section observer — moves the dot
+		const scrollspyObserver = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					setActiveSection(entry.target.id);
+				} else if (scrollDir === 'up') {
+					// Section slipped below the trigger band → scrolling UP
+					const idx = mainSectionEls.indexOf(entry.target);
+					setActiveSection(idx > 0 ? mainSectionEls[idx - 1].id : null);
+				}
+			});
+		}, { rootMargin: '-100px 0px -65% 0px', threshold: 0 });
+
+		mainSectionEls.forEach(el => scrollspyObserver.observe(el));
+
+		// Sub-section observer — updates sub-link colour only; dot stays at Projects
+		const subSectionEls = ['client-work', 'other-projects']
+			.map(id => document.getElementById(id)).filter(Boolean);
+
+		const subScrollspyObserver = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					setActiveSubLink(entry.target.id);
+				} else if (scrollDir === 'up') {
+					const idx = subSectionEls.indexOf(entry.target);
+					setActiveSubLink(idx > 0 ? subSectionEls[idx - 1].id : null);
+				}
+			});
+		}, { rootMargin: '-100px 0px -65% 0px', threshold: 0 });
+
+		subSectionEls.forEach(el => subScrollspyObserver.observe(el));
+
+		// Click feedback: pulse the dot on any sidebar link click
+		document.querySelectorAll('.sidebar-link, .sidebar-sublink').forEach(link => {
+			link.addEventListener('click', () => {
+				if (prefersReducedMotion) return;
+				dot.classList.remove('is-clicking');
+				void dot.offsetWidth; // force reflow to restart animation
+				dot.classList.add('is-clicking');
+				dot.addEventListener('animationend', () => dot.classList.remove('is-clicking'), { once: true });
+			});
+		});
+
+		// rAF-throttled scroll tick: CSS progress fill + bottom-of-page #contact fix
+		let rafPending = false;
+
+		function onScrollTick() {
+			const scrollY = window.scrollY;
+			const docScrollable = document.documentElement.scrollHeight - window.innerHeight;
+			const progress = docScrollable > 0 ? Math.min(scrollY / docScrollable, 1) : 0;
+			if (sidebarBody) sidebarBody.style.setProperty('--scroll-progress', progress);
+			// Force #contact active when within 200px of document end
+			if (docScrollable > 0 && docScrollable - scrollY < 200) setActiveSection('contact');
+			rafPending = false;
+		}
+
+		window.addEventListener('scroll', () => {
+			if (!rafPending) { rafPending = true; requestAnimationFrame(onScrollTick); }
+		}, { passive: true });
+
+		onScrollTick();
+
+		// Resize: reposition dot after layout settles (150ms debounce)
+		let resizeTimer;
+		window.addEventListener('resize', () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => {
+				if (activeSectionId) positionDot(sidebarLinkMap[activeSectionId] || null);
+				onScrollTick();
+			}, 150);
+		});
 
 		// Mobile menu toggle functionality
 		const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
@@ -459,29 +579,18 @@
 			});
 		}, observerOptions);
 
-		document.querySelectorAll('section').forEach(section => {
-			observer.observe(section);
+		document.querySelectorAll('section, .project-card').forEach(el => {
+			observer.observe(el);
 		});
 
 
-		const revealOnScroll = () => {
-			const sections = document.querySelectorAll('section, .project-card');
+		// Nav handoff: hero visibility drives navbar ↔ sidebar switch
+		const heroHandoffObserver = new IntersectionObserver((entries) => {
+			document.body.classList.toggle('nav-handoff-active', !entries[0].isIntersecting);
+		}, { threshold: 0.3 });
 
-			sections.forEach(section => {
-				const sectionTop = section.getBoundingClientRect().top;
-				const triggerPoint = window.innerHeight * 0.8;
-
-				if (sectionTop < triggerPoint) {
-					section.style.opacity = "1";
-					section.style.transform = "translateY(0)";
-				}
-			});
-		};
-
-	window.addEventListener('scroll', revealOnScroll);
-	window.addEventListener('load', revealOnScroll);
-
-
+		const heroSection = document.getElementById('home');
+		if (heroSection) heroHandoffObserver.observe(heroSection);
 
 	</script>
 </body>
